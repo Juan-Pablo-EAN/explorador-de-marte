@@ -42,7 +42,7 @@ anterior.addEventListener("click", () => {
     console.log(pagina);
 });
 
-async function mostrarData(day, page) { //se crea una funcion asincrona que esperará a que la funcion que tenga await se culmine
+const mostrarData = async (day, page) => { //se crea una funcion asincrona que esperará a que la funcion que tenga await se culmine
     try { //se recomienda usar try catch
         const data = await obtenerData(); //await espera a que la funcion obtenerData() se termine
         data.photos.map(foto => { //cuando la funcion de await culmine se ejecuta la siguiente instrucción
@@ -82,15 +82,14 @@ async function mostrarData(day, page) { //se crea una funcion asincrona que espe
 
     animaciones();
 
-    async function obtenerData() { //esta es la funcion fetch que espera await
-        return fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/${explorador}/photos?sol=${day}&page=${page}&api_key=BeO4hV6zUslD93eC5bWyUYcGvLG0QaFGGoido9UC`)
-            .then(response => response.json())
-            .then(data => data); //retorna la data del json de la api
+    async function obtenerData() { //esta es la funcion fetch o axios que espera await, es mejor escribirla asi y no tipo flecha
+        return axios(`https://api.nasa.gov/mars-photos/api/v1/rovers/${explorador}/photos?sol=${day}&page=${page}&api_key=BeO4hV6zUslD93eC5bWyUYcGvLG0QaFGGoido9UC`)
+            .then(datos => datos.data); //retorna la data del json de la api
+            //retorna los datos de la promesa desencapsulados
         //esa data la recibe la variable data en el await
     }
 }
 
 const animaciones = () => {
-    const divImg = document.querySelector(".divImg");
-    
+    const divImg = document.querySelector(".divImg"); 
 }
