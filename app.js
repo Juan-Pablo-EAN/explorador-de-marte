@@ -80,16 +80,10 @@ const mostrarData = async (day, page) => { //se crea una funcion asincrona que e
         console.warn("Error de la API:" + err);
     }
 
-    animaciones();
-
     async function obtenerData() { //esta es la funcion fetch o axios que espera await, es mejor escribirla asi y no tipo flecha
         return axios(`https://api.nasa.gov/mars-photos/api/v1/rovers/${explorador}/photos?sol=${day}&page=${page}&api_key=BeO4hV6zUslD93eC5bWyUYcGvLG0QaFGGoido9UC`)
             .then(datos => datos.data); //retorna la data del json de la api
             //retorna los datos de la promesa desencapsulados
         //esa data la recibe la variable data en el await
     }
-}
-
-const animaciones = () => {
-    const divImg = document.querySelector(".divImg"); 
 }
